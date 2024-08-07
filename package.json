@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "node index",
-    "standard": "npx standard --fix"
+    "standard": "npx standard --fix",
     "build": "[my-framework] build --output public"
   },
   "repository": {

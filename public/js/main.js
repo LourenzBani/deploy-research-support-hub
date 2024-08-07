@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     auth.onAuthStateChanged(async (user) => {
         const userNameSpan = document.getElementById('userName');
         const authButton = document.getElementById('authButton');
+        const links = document.querySelectorAll('.nav-container a:not([href="/"]):not([href="/login"])');
 
         if (user) {
             console.log('User is logged in:', user.uid);
@@ -55,10 +56,19 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         } else {
             console.log('No user is logged in');
-            userNameSpan.textContent = 'Hello, User';
+            userNameSpan.textContent = 'Hello, Student';
             authButton.textContent = 'Login';
             authButton.href = '/login';
             hideAdminLink();
+
+            // Redirect non-logged-in users to home page if they try to access restricted pages
+            links.forEach(link => {
+                link.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    alert('Please log in to access this page.');
+                    window.location.href = '/';
+                });
+            });
         }
     });
 
